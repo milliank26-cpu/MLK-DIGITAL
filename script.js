@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Contact Form redirected directly to WhatsApp
+ // 4. Contact Form redirected directly to WhatsApp (Fixed Formatting)
 const contactForm = document.getElementById('contact-form');
 
 if (contactForm) {
@@ -75,13 +75,18 @@ if (contactForm) {
         const packageSelected = document.getElementById('package').options[document.getElementById('package').selectedIndex].text;
         const message = document.getElementById('message').value;
         
-        // Format the message for WhatsApp
-        const textMessage = `Hello MLK Digital,%0A%0AI would like to make an enquiry:%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Package:* ${encodeURIComponent(packageSelected)}%0A*Business Brief:* ${encodeURIComponent(message)}`;
+        // Write text naturally using \n for breaks
+        const rawMessage = `Hello MLK Digital,\n\nI would like to make an enquiry:\n*Name:* ${name}\n*Phone:* ${phone}\n*Package:* ${packageSelected}\n*Business Brief:* ${message}`;
         
-        // Replace YOUR_WHATSAPP_NUMBER with your phone number (e.g., 256772000000)
-        const whatsappUrl = `https://wa.me/+256 768527454?{textMessage}`;
-        // Open WhatsApp instantly
-        window.open(whatsappUrl, '_blank');
+        // Encode everything cleanly at once
+        const encodedMessage = encodeURIComponent(rawMessage);
+        
+        // Clean URL structure without spaces, symbols, or double-encoding bugs
+        const whatsappUrl = `https://wa.me{encodedMessage}`;
+        
+        // Overrides browser restrictions on Android devices to fire the WhatsApp app directly
+        window.location.href = whatsappUrl;
+        
         contactForm.reset();
     });
 }
