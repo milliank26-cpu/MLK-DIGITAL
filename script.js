@@ -62,24 +62,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Contact Form Simulation (Safe frontend validation & user response)
-    const contactForm = document.getElementById('contact-form');
-    const formStatus = document.getElementById('form-status');
+    // 4. Contact Form redirected directly to WhatsApp
+const contactForm = document.getElementById('contact-form');
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            
-            if(formStatus) {
-                formStatus.className = 'form-status success';
-                formStatus.textContent = `Thank you, ${name}. We have received your request. We will reach you shortly on ${phone}.`;
-                
-                // Clear the form fields
-                contactForm.reset();
-            }
-        });
-    }
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Grab form values
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const packageSelected = document.getElementById('package').options[document.getElementById('package').selectedIndex].text;
+        const message = document.getElementById('message').value;
+        
+        // Format the message for WhatsApp
+        const textMessage = `Hello MLK Digital,%0A%0AI would like to make an enquiry:%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Package:* ${encodeURIComponent(packageSelected)}%0A*Business Brief:* ${encodeURIComponent(message)}`;
+        
+        // Replace YOUR_WHATSAPP_NUMBER with your phone number (e.g., 256772000000)
+        const whatsappUrl = `https://wa.me/+256 768527454{textMessage}`;
+        // Open WhatsApp instantly
+        window.open(whatsappUrl, '_blank');
+        contactForm.reset();
+    });
+}
+
 });
