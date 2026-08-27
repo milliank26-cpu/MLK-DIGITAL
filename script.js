@@ -62,45 +62,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
- // 4. Contact Form redirected directly to WhatsApp (Android & iOS Universal App Link Fix)
-const contactForm = document.getElementById('contact-form');
+// 4. Strictly URL-encode the final compiled string
+const encodedMessage = encodeURIComponent(rawMessage);
 
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        // 1. Block the default form reload instantly
-        e.preventDefault();
-        
-        // 2. Safely capture the form field inputs
-        const name = document.getElementById('name').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const packageSelected = document.getElementById('package').options[document.getElementById('package').selectedIndex].text;
-        const message = document.getElementById('message').value.trim();
-        
-        // 3. Assemble message text naturally with clean line-breaks (\n)
-        const rawMessage = `Hello MLK Digital,\n\nI would like to make an enquiry:\n• Name: ${name}\n• Phone: ${phone}\n• Package: ${packageSelected}\n• Business Brief: ${message}`;
-        
-        // 4. Strictly URL-encode the final compiled string
-        const encodedMessage = encodeURIComponent(rawMessage);
-        
-        // 5. Universal endpoint targeting your exact phone number (No spaces, dashes, or + signs)
-        const targetUrl = `https://whatsapp.com${encodedMessage}`;
+// 5. WhatsApp direct chat link
+// Replace 2567XXXXXXXX with your actual WhatsApp number
+const whatsappNumber = '256768527454';
+const targetUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
-        
-        // 6. Create a temporary physical link element to bypass Android WebView pop-up block policies
-        const dynamicLink = document.createElement('a');
-        dynamicLink.href = targetUrl;
-        dynamicLink.target = '_blank';
-        dynamicLink.rel = 'noopener noreferrer';
-        
-        // 7. Inject to DOM, trigger simulated native finger touch, and remove immediately
-        document.body.appendChild(dynamicLink);
-        dynamicLink.click();
-        document.body.removeChild(dynamicLink);
-        
-        // 8. Safely wipe out the input layout values back to clean placeholders
-        contactForm.reset();
-    });
-}
+// 6. Create a temporary physical link element
+const dynamicLink = document.createElement('a');
+dynamicLink.href = targetUrl;
+dynamicLink.target = '_blank';
+dynamicLink.rel = 'noopener noreferrer';
+
+// 7. Trigger the WhatsApp link
+document.body.appendChild(dynamicLink);
+dynamicLink.click();
+document.body.removeChild(dynamicLink);
+
+// 8. Reset the form
+contactForm.reset();
 
 
 });
