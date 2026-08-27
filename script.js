@@ -83,7 +83,7 @@ if (contactForm) {
         const encodedMessage = encodeURIComponent(rawMessage);
         
         // 5. Universal endpoint targeting your exact phone number (No spaces, dashes, or + signs)
-        const targetUrl = `https://whatsapp.com{encodedMessage}`;
+        const targetUrl = `https://whatsapp.com${encodedMessage}`;
 
         
         // 6. Create a temporary physical link element to bypass Android WebView pop-up block policies
