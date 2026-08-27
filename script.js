@@ -67,7 +67,7 @@ const encodedMessage = encodeURIComponent(rawMessage);
 
 // 5. WhatsApp direct chat link
 // Replace 2567XXXXXXXX with your actual WhatsApp number
-const whatsappNumber = '256768527454';
+const whatsappNumber = '+256768527454';
 const targetUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
 window.location.href = targetUrl;
