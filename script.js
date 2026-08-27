@@ -70,16 +70,7 @@ const encodedMessage = encodeURIComponent(rawMessage);
 const whatsappNumber = '256768527454';
 const targetUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
-// 6. Create a temporary physical link element
-const dynamicLink = document.createElement('a');
-dynamicLink.href = targetUrl;
-dynamicLink.target = '_blank';
-dynamicLink.rel = 'noopener noreferrer';
-
-// 7. Trigger the WhatsApp link
-document.body.appendChild(dynamicLink);
-dynamicLink.click();
-document.body.removeChild(dynamicLink);
+window.location.href = targetUrl;
 
 // 8. Reset the form
 contactForm.reset();
