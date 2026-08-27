@@ -91,7 +91,7 @@ ${message}`;
         const encodedMessage = encodeURIComponent(rawMessage);
 
         // Your WhatsApp number — digits only
-        const whatsappNumber = '256768527454';
+        const whatsappNumber = '+256768527454';
 
         // Open WhatsApp
         const targetUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
