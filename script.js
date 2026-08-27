@@ -62,33 +62,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
- // 4. Contact Form redirected directly to WhatsApp (Fixed Formatting)
+ // 4. Contact Form redirected directly to WhatsApp (Android & iOS Universal App Link Fix)
 const contactForm = document.getElementById('contact-form');
 
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
+        // 1. Block the default form reload instantly
         e.preventDefault();
         
-        // Grab form values
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
+        // 2. Safely capture the form field inputs
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
         const packageSelected = document.getElementById('package').options[document.getElementById('package').selectedIndex].text;
-        const message = document.getElementById('message').value;
+        const message = document.getElementById('message').value.trim();
         
-        // Write text naturally using \n for breaks
-        const rawMessage = `Hello MLK Digital,\n\nI would like to make an enquiry:\n*Name:* ${name}\n*Phone:* ${phone}\n*Package:* ${packageSelected}\n*Business Brief:* ${message}`;
+        // 3. Assemble message text naturally with clean line-breaks (\n)
+        const rawMessage = `Hello MLK Digital,\n\nI would like to make an enquiry:\n• Name: ${name}\n• Phone: ${phone}\n• Package: ${packageSelected}\n• Business Brief: ${message}`;
         
-        // Encode everything cleanly at once
+        // 4. Strictly URL-encode the final compiled string
         const encodedMessage = encodeURIComponent(rawMessage);
         
-        // Clean URL structure without spaces, symbols, or double-encoding bugs
-        const whatsappUrl = `https://wa.me{encodedMessage}`;
+        // 5. Universal endpoint targeting your exact phone number (No spaces, dashes, or + signs)
+        const targetUrl = `https://whatsapp.com{encodedMessage}`;
         
-        // Overrides browser restrictions on Android devices to fire the WhatsApp app directly
-        window.location.href = whatsappUrl;
+        // 6. Create a temporary physical link element to bypass Android WebView pop-up block policies
+        const dynamicLink = document.createElement('a');
+        dynamicLink.href = targetUrl;
+        dynamicLink.target = '_blank';
+        dynamicLink.rel = 'noopener noreferrer';
         
+        // 7. Inject to DOM, trigger simulated native finger touch, and remove immediately
+        document.body.appendChild(dynamicLink);
+        dynamicLink.click();
+        document.body.removeChild(dynamicLink);
+        
+        // 8. Safely wipe out the input layout values back to clean placeholders
         contactForm.reset();
     });
 }
+
 
 });
