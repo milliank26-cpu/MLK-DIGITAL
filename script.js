@@ -62,18 +62,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-// 4. Strictly URL-encode the final compiled string
-const encodedMessage = encodeURIComponent(rawMessage);
+// 4. Send contact form to WhatsApp
+const contactForm = document.getElementById('contact-form');
 
-// 5. WhatsApp direct chat link
-// Replace 2567XXXXXXXX with your actual WhatsApp number
-const whatsappNumber = '+256768527454';
-const targetUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-window.location.href = targetUrl;
+        // Get values from the form
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const packageName = document.getElementById('package').options[
+            document.getElementById('package').selectedIndex
+        ].text;
+        const message = document.getElementById('message').value.trim();
 
-// 8. Reset the form
-contactForm.reset();
+        // Create WhatsApp message
+        const rawMessage = `Hello, I would like to make an enquiry.
 
+Name / Business: ${name}
+Phone: ${phone}
+Package: ${packageName}
 
+Business description:
+${message}`;
+
+        // Encode message
+        const encodedMessage = encodeURIComponent(rawMessage);
+
+        // Your WhatsApp number — digits only
+        const whatsappNumber = '256768527454';
+
+        // Open WhatsApp
+        const targetUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+        window.location.href = targetUrl;
+    });
+}
 });
