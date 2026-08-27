@@ -79,7 +79,7 @@ if (contactForm) {
         const textMessage = `Hello MLK Digital,%0A%0AI would like to make an enquiry:%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Package:* ${encodeURIComponent(packageSelected)}%0A*Business Brief:* ${encodeURIComponent(message)}`;
         
         // Replace YOUR_WHATSAPP_NUMBER with your phone number (e.g., 256772000000)
-        const whatsappUrl = `https://wa.me/+256 768527454{textMessage}`;
+        const whatsappUrl = `https://wa.me/+256 768527454?{textMessage}`;
         // Open WhatsApp instantly
         window.open(whatsappUrl, '_blank');
         contactForm.reset();
