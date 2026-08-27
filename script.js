@@ -94,7 +94,7 @@ ${message}`;
         const whatsappNumber = '+256768527454';
 
         // Open WhatsApp
-        const targetUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+        const targetUrl = `https://wa.me/+256768527454?text=${encodedMessage}`;
 
         window.location.href = targetUrl;
     });
