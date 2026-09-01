@@ -62,24 +62,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Contact Form Simulation (Safe frontend validation & user response)
-    const contactForm = document.getElementById('contact-form');
-    const formStatus = document.getElementById('form-status');
+// 4. Send contact form to WhatsApp
+const contactForm = document.getElementById('contact-form');
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            
-            if(formStatus) {
-                formStatus.className = 'form-status success';
-                formStatus.textContent = `Thank you, ${name}. We have received your request. We will reach you shortly on ${phone}.`;
-                
-                // Clear the form fields
-                contactForm.reset();
-            }
-        });
-    }
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Get values from the form
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const packageName = document.getElementById('package').options[
+            document.getElementById('package').selectedIndex
+        ].text;
+        const message = document.getElementById('message').value.trim();
+
+        // Create WhatsApp message
+        const rawMessage = `Hello, I would like to make an enquiry.
+
+Name / Business: ${name}
+Phone: ${phone}
+Package: ${packageName}
+
+Business description:
+${message}`;
+
+        // Encode message
+        const encodedMessage = encodeURIComponent(rawMessage);
+
+        // Your WhatsApp number — digits only
+        const whatsappNumber = '+256768527454';
+
+        // Open WhatsApp
+        const targetUrl = `https://wa.me/+256768527454?text=${encodedMessage}`;
+
+        window.location.href = targetUrl;
+    });
+}
 });
