@@ -671,3 +671,191 @@ body {
         width: 100%;
     }
 }
+/* --- ABSTRACT UI SHOWCASE SECTION STYLES --- */
+.showcase-section {
+    padding: 6rem 0;
+    background-color: #fafafa;
+    overflow: hidden;
+}
+
+.showcase-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* Left Content Styles */
+.showcase-content .showcase-tag {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #766353;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.showcase-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #111111;
+    margin-bottom: 1rem;
+}
+
+.showcase-content p {
+    color: #666666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.showcase-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sc-feat {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #222222;
+}
+
+.sc-feat i {
+    color: #c5a880;
+}
+
+/* Right Abstract UI Graphic Styles */
+.showcase-visual-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px; /* Slight depth perspective */
+}
+
+.abstract-ui-canvas {
+    width: 100%;
+    max-width: 480px;
+    height: 320px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
+    border: 1px solid #eeeeee;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: rotateY(-5deg) rotateX(2deg); /* Modern, slight 3D slant */
+    transition: transform 0.5s ease;
+}
+
+.abstract-ui-canvas:hover {
+    transform: rotateY(0deg) rotateX(0deg) translateY(-5px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+}
+
+/* UI Window Header Header Elements */
+.ui-window-header {
+    background-color: #f6f6f6;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.ui-dots {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.ui-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #e5e5e5;
+}
+
+.ui-dots span:nth-child(1) { background-color: #ff5f56; } /* Mac-style window controls */
+.ui-dots span:nth-child(2) { background-color: #ffbd2e; }
+.ui-dots span:nth-child(3) { background-color: #27c93f; }
+
+.ui-search-bar {
+    height: 12px;
+    width: 120px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #eaeaea;
+}
+
+/* UI Main Body Workspace Mockup */
+.ui-window-body {
+    flex-grow: 1;
+    display: flex;
+}
+
+.ui-sidebar-mock {
+    width: 60px;
+    background-color: #fafafa;
+    border-right: 1px solid #eeeeee;
+    padding: 1rem;
+}
+
+.ui-main-panel-mock {
+    flex-grow: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ui-card-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.ui-card-mock {
+    height: 60px;
+    background-color: #f4f6f8;
+    border-radius: 6px;
+}
+
+.ui-card-mock.large { flex-grow: 2; background-color: #f0f2f5; }
+.ui-card-mock.small { flex-grow: 1; border: 2px dashed #e5e5e5; background: none; }
+
+.ui-lines-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.ui-line-mock {
+    height: 8px;
+    background-color: #eaeaea;
+    border-radius: 4px;
+}
+
+.ui-line-mock.long { width: 90%; }
+.ui-line-mock.mid { width: 65%; background-color: #f0f0f0; }
+.ui-line-mock.short { width: 40%; background-color: #c5a880; opacity: 0.6; } /* Accent lines */
+
+/* Responsive adaptations */
+@media (max-width: 768px) {
+    .showcase-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: left;
+    }
+    .abstract-ui-canvas {
+        transform: none; /* Flatten on mobile devices for easy viewing */
+        max-width: 100%;
+    }
+}
